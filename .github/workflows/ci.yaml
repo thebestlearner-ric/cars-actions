@@ -44,7 +44,7 @@ jobs:
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
   pull-python:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     needs: build-python
     steps:
     - name: Use tag version from build-python job
