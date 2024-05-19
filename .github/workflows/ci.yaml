@@ -33,11 +33,11 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
-      
+
     - name: Build, tag, and push docker image to Amazon ECR
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: cars-action
+        REPOSITORY: cars-actions
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
