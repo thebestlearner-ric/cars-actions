@@ -18,7 +18,7 @@ jobs:
       id-token: write
       contents: read
     outputs:
-      tag-version: ${{ steps.build-tag-push-ecr.outputs.IMAGE_TAG }}
+      tag-version: ${{ steps.build-tag-push-ecr.outputs.image_tag }}
     steps:
     - uses: actions/checkout@v3
 
@@ -42,7 +42,7 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-        echo $IMAGE_TAG >> $GITHUB_OUTPUT
+        echo image_tag=$IMAGE_TAG >> $GITHUB_OUTPUT
 
   pull-python:
     runs-on: ubuntu-latest
