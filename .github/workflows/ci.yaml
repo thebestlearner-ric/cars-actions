@@ -48,10 +48,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-python
     steps:
-    - name: Use tag version from build-python job
-      run: echo "The tag version is ${{ needs.build-python.outputs.tag-version }}"
-      env:
-        TAG_VERSION: ${{ needs.build-python.outputs.tag-version }}
     - name: Pull from ECR
       uses: ./.github/workflows/cd.yaml
       with:
