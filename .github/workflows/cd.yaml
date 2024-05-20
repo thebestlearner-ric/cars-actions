@@ -2,6 +2,10 @@ name: Pull from AWS ECR
 
 on:
   workflow_call:
+    inputs:
+      repo_name:
+        required: true
+        type: string
     secrets: 
       TAG_VERSION:
         required: true
@@ -29,7 +33,7 @@ jobs:
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: cars-actions
+          REPOSITORY: ${{ inputs.repo_name }}
           IMAGE_TAG: ${{ secrets.TAG_VERSION }}
         run: |
           docker pull $REGISTRY/$REPOSITORY:$IMAGE_TAG

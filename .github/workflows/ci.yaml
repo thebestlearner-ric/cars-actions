@@ -19,6 +19,7 @@ jobs:
       contents: read
     outputs:
       tag-version: ${{ steps.build-tag-push-ecr.outputs.image_tag }}
+      repo-name: ${{ steps.build-tag-push-ecr.outputs.repo_name }}
     steps:
     - uses: actions/checkout@v3
 
@@ -43,6 +44,7 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         echo image_tag=$IMAGE_TAG >> $GITHUB_OUTPUT
+        echo repo_name=$REPOSITORY >> $GITHUB_OUTPUT
 
   pull-python:
     runs-on: ubuntu-latest
@@ -53,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Pull from ECR
-      uses: ./.github/workflows/cd.yaml
+      uses: thebestlearner-ric/cars-actions/.github/workflows/cd.yaml@main
       with:
-        config-path: .github/workflows/cd.yaml
+        repo_name: ${{ needs.build-python.outputs.repo-name }}
         TAG_VERSION: ${{ needs.build-python.outputs.tag-version }}        
