@@ -55,4 +55,5 @@ jobs:
     - name: Pull from ECR
       uses: ./.github/workflows/cd.yaml
       with:
+        config-path: .github/workflows/cd.yaml
         TAG_VERSION: ${{ needs.build-python.outputs.tag-version }}        
