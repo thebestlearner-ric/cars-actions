@@ -55,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Pull from ECR
-      uses: ./.github/workflows/cd.yaml@main
+      uses: ./.github/workflows/cd.yaml
       with:
         repo_name: ${{ needs.build-python.outputs.repo-name }}
         TAG_VERSION: ${{ needs.build-python.outputs.tag-version }}        
